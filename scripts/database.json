@@ -1,0 +1,271 @@
+{
+    "words":
+    [
+        {
+            "word":[
+                {
+                    "original": "carne",
+                    "canonical": "carne",
+                    "lang": "pt"
+                },
+                {
+                    "original": "mięso",
+                    "canonical": "mieso",
+                    "lang": "pl"
+                },
+                {
+                    "original": "meat",
+                    "canonical": "meat",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "cebola",
+                    "canonical": "cebola",
+                    "lang": "pt"
+                },
+                {
+                    "original": "cebula",
+                    "canonical": "cebula",
+                    "lang": "pl"
+                },
+                {
+                    "original": "onion",
+                    "canonical": "onion",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "moeda",
+                    "canonical": "moeda",
+                    "lang": "pt"
+                },
+                {
+                    "original": "moneta",
+                    "canonical": "moneta",
+                    "lang": "pl"
+                },
+                {
+                    "original": "coin",
+                    "canonical": "coin",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "salsinha",
+                    "canonical": "salsinha",
+                    "lang": "pt"
+                },
+                {
+                    "original": "pietruszka",
+                    "canonical": "pietruszka",
+                    "lang": "pl"
+                },
+                {
+                    "original": "parsley",
+                    "canonical": "parsley",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "branco",
+                    "canonical": "branco",
+                    "lang": "pt"
+                },
+                {
+                    "original": "biały",
+                    "canonical": "bialy",
+                    "lang": "pl"
+                },
+                {
+                    "original": "white",
+                    "canonical": "white",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "faca",
+                    "canonical": "faca",
+                    "lang": "pt"
+                },
+                {
+                    "original": "nóż",
+                    "canonical": "noz",
+                    "lang": "pl"
+                },
+                {
+                    "original": "knife",
+                    "canonical": "knife",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "cenoura",
+                    "canonical": "cenoura",
+                    "lang": "pt"
+                },
+                {
+                    "original": "marchew",
+                    "canonical": "marchew",
+                    "lang": "pl"
+                },
+                {
+                    "original": "carrot",
+                    "canonical": "carrot",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "grande",
+                    "canonical": "grande",
+                    "lang": "pt"
+                },
+                {
+                    "original": "duże",
+                    "canonical": "duze",
+                    "lang": "pl"
+                },
+                {
+                    "original": "big",
+                    "canonical": "big",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "leão",
+                    "canonical": "leao",
+                    "lang": "pt"
+                },
+                {
+                    "original": "lew",
+                    "canonical": "lew",
+                    "lang": "pl"
+                },
+                {
+                    "original": "lion",
+                    "canonical": "lion",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "cachorro",
+                    "canonical": "cachorro",
+                    "lang": "pt"
+                },
+                {
+                    "original": "pies",
+                    "canonical": "pies",
+                    "lang": "pl"
+                },
+                {
+                    "original": "dog",
+                    "canonical": "dog",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "internet",
+                    "canonical": "internet",
+                    "lang": "pt"
+                },
+                {
+                    "original": "internet",
+                    "canonical": "internet",
+                    "lang": "pl"
+                },
+                {
+                    "original": "internet",
+                    "canonical": "internet",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "pepino",
+                    "canonical": "pepino",
+                    "lang": "pt"
+                },
+                {
+                    "original": "ogórek",
+                    "canonical": "ogorek",
+                    "lang": "pl"
+                },
+                {
+                    "original": "cucumber",
+                    "canonical": "cucumber",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "uva",
+                    "canonical": "uva",
+                    "lang": "pt"
+                },
+                {
+                    "original": "winogrono",
+                    "canonical": "winogrono",
+                    "lang": "pl"
+                },
+                {
+                    "original": "grape",
+                    "canonical": "grape",
+                    "lang": "us"
+                }
+            ]
+        },
+        {
+            "word":[
+                {
+                    "original": "bandeira",
+                    "canonical": "bandeira",
+                    "lang": "pt"
+                },
+                {
+                    "original": "flag",
+                    "canonical": "flag",
+                    "lang": "pl"
+                },
+                {
+                    "original": "flaga",
+                    "canonical": "flaga",
+                    "lang": "us"
+                }
+            ]
+        }
+    ]
+}

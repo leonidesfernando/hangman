@@ -1,0 +1,45 @@
+
+.parent-img {
+    position: relative;
+}
+
+::after ::before{
+    box-sizing: inherit;
+}
+
+.parent-img-responsive {
+    width: 100%;
+    height: auto;
+}
+
+.child-img {
+    position: absolute;
+    top: 17.5%;
+    left: 19.5%;
+    right: 50%;
+    bottom: 10%;
+}
+
+/*** for the result */
+.box {
+    width: 40%;
+    height: 25%;
+    position: absolute;
+    top: 38%;
+    left: 30%;
+    opacity: 0.94;
+    /*background: #0057e3;*/
+  }
+  .overlay {
+    z-index: 9;
+/*    background: #009938; */
+  }
+  .box-lose{
+    border-color:#876605; 
+    background-color: #ffc107;
+  }
+
+  .box-win{
+    border-color: #033785;
+    background-color: #0d6efd;
+  }
