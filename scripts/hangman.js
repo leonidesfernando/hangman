@@ -5,8 +5,6 @@ const TOTAL = 7
 function start(){
     console.log('no start')
     console.log(word)
-    //document.getElementById('resultLose').style = 'display: none'
-    //document.getElementById('resultWin').style = 'display: none'
 
     generateTables(word)
     var input = document.getElementById('inputLetterOrWord')
@@ -27,7 +25,7 @@ function send(){
         return
     }
 
-    if(input.value != '' && !hasLetter(letter.toLowerCase())){
+    if(letter != '' && !hasLetter(letter.toLowerCase())){
         var img = document.getElementById('playerStatus')
         console.log(getCurrentImageStatus())
         img.src = getNextImageName()
@@ -75,7 +73,6 @@ function youWin(){
     for(var w in word){
         const lengWord = parseInt(word[w].canonical.length)
         for(var i = 0; i < lengWord; i++){
-            var char = word[w].canonical.charAt(i)
             updateTableWithLetter(word[w], i)
         }
     }
@@ -83,7 +80,7 @@ function youWin(){
 }
 
 function youLose(){
-    showFinalMessage('Não foi dessa vez! Tente outra novamente a prática te leva à perfeição!',
+    showFinalMessage('Não foi dessa vez! Tente outra novamente, a prática te leva à perfeição!',
     	   document.getElementById('resultLose'))
 }
 
@@ -157,7 +154,7 @@ function configureInput(input, language, index){
     input.setAttribute('maxlength', 1)
     input.setAttribute('class', 'text-center')
     input.setAttribute('disabled',true)
-    input.setAttribute('style', 'border-bottom: 4px solid;')
+    input.setAttribute('style', 'border-bottom: 4px solid; font-weight: bold;')
 }
 
 function getNextImageName(){

@@ -1,3 +1,6 @@
+@-ms-viewport {
+  width: device-width;
+}
 
 .parent-img {
     position: relative;
@@ -15,7 +18,7 @@
 .child-img {
     position: absolute;
     top: 17.5%;
-    left: 19.5%;
+    left: 15.5%;
     right: 50%;
     bottom: 10%;
 }
