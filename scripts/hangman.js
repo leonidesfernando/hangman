@@ -1,6 +1,15 @@
-const data =  JSON.parse(getDatabase())
+
+//import localDataBase from './database.json'
+//import {getDatabase as database } from './scripts/database.js'
+
+//var database = require('getDatabase')
+
+//console.log(JSON.stringify(localDataBase))
+
+const data =  JSON.parse(getDatabaseNew())
 const word = generateWord(data)
 const TOTAL = 7
+const LAST_IMAGE = 'img/7.png'
 
 function start(){
     console.log('no start')
@@ -25,10 +34,21 @@ function send(){
         return
     }
 
-    if(letter != '' && !hasLetter(letter.toLowerCase())){
+    if(letter.length == 1 && !hasLetter(letter.toLowerCase())){
         var img = document.getElementById('playerStatus')
         console.log(getCurrentImageStatus())
         img.src = getNextImageName()
+    }else if(letter.length > 1){
+        var size = letter.length;
+        var i = 0;
+        var char = letter.charAt(i)
+        while(i < size && hasLetter(char)){
+            char = letter.charAt(++i)
+        }
+        if(i < size){
+            var img = document.getElementById('playerStatus');
+            img.src = LAST_IMAGE;
+        }
     }
 
     if(ifWin()){
@@ -51,7 +71,7 @@ function send(){
 }
 
 function ifWin(){
-    filedOutAnyWord = true;
+    var filedOutAnyWord = true;
     for(var w in word){
         filedOutAnyWord = true;
         
@@ -68,6 +88,7 @@ function ifWin(){
     }
     return filedOutAnyWord;
 }
+
 function youWin(){
 
     for(var w in word){
@@ -80,7 +101,8 @@ function youWin(){
 }
 
 function youLose(){
-    showFinalMessage('Não foi dessa vez! Tente outra novamente, a prática te leva à perfeição!',
+    var words = `A palavra era: ${word[0].original} em ${word[0].lang}, ${word[1].original} em ${word[1].lang} e ${word[2].original} em ${word[2].lang}. `;
+    showFinalMessage(words + 'Não foi dessa vez! Tente outra novamente, a prática te leva à perfeição!',
     	   document.getElementById('resultLose'))
 }
 
@@ -129,12 +151,25 @@ function updateTableWithLetter(wordLang, index){
 function generateTables(word){
     
     for(w in word){
+        generateHints(word[w].lang, word[w].hint)
         generateTableByLanguage(word[w].lang, word[w].original)
     }
 }
 
+function generateHints(language, hint){
+
+    const row = document.getElementById(`${language}Row`);
+    const td = document.createElement('td')
+    const img = document.createElement('img')
+    img.innerText = hint
+    img.setAttribute('src', 'img/hint-ideia.png')
+    img.setAttribute('title', hint)
+    td.appendChild(img)
+    row.appendChild(td)
+}
+
 function generateTableByLanguage(language, orignalWord){
-    var len = orignalWord.length
+    let len = orignalWord.length
 
     const row = document.getElementById(`${language}Row`);
     for(var i = 0; i < len; i++){
@@ -173,9 +208,12 @@ function getCurrentImageStatus(){
 
 //
 
+
 function getDatabase() {
 
-    return `{
+    return `{"words":[{"word":[{"original":"carne","canonical":"carne","hint":"NO_HINT_TOO_EASY","lang":"pt"},{"original":"meat","canonical":"meat","hint":"NO_HINT_TOO_EASY","lang":"us"},{"original":"mięso","canonical":"mieso","hint":"NO_HINT_TOO_EASY","lang":"pl"}]},{"word":[{"original":"pato","canonical":"pato","hint":"NO_HINT_TOO_EASY","lang":"pt"},{"original":"duck","canonical":"duck","hint":"NO_HINT_TOO_EASY","lang":"us"},{"original":"kaczka","canonical":"kaczka","hint":"NO_HINT_TOO_EASY","lang":"pl"}]}]}`;
+    
+    /*return `{
         "words":
         [
             {
@@ -445,5 +483,9 @@ function getDatabase() {
                 ]
             }
         ]
-    }`;
+    }`; */
+}
+
+function getDatabaseNew() {
+    return `{"words":[{"word":[{"original":"carne","canonical":"carne","hint":"Essa não vai ter dica porque é muito fácil!","lang":"pt"},{"original":"meat","canonical":"meat","hint":"This one won\u0027t have a tip because it\u0027s very easy!","lang":"us"},{"original":"mięso","canonical":"mieso","hint":"Ten nie będzie miał napiwku, bo to bardzo proste!","lang":"pl"}]},{"word":[{"original":"pato","canonical":"pato","hint":"É um animal","lang":"pt"},{"original":"duck","canonical":"duck","hint":"It\u0027s an animal","lang":"us"},{"original":"kaczka","canonical":"kaczka","hint":"To jest zwierzę","lang":"pl"}]},{"word":[{"original":"maçã","canonical":"maca","hint":"Essa não vai ter dica porque é muito fácil!","lang":"pt"},{"original":"apple","canonical":"apple","hint":"This one won\u0027t have a tip because it\u0027s very easy!","lang":"us"},{"original":"jabłko","canonical":"jablko","hint":"Ten nie będzie miał napiwku, bo to bardzo proste!","lang":"pl"}]},{"word":[{"original":"café","canonical":"cafe","hint":"Essa não vai ter dica porque é muito fácil!","lang":"pt"},{"original":"coffee","canonical":"coffee","hint":"This one won\u0027t have a tip because it\u0027s very easy!","lang":"us"},{"original":"kawa","canonical":"kawa","hint":"Ten nie będzie miał napiwku, bo to bardzo proste!","lang":"pl"}]},{"word":[{"original":"cebola","canonical":"cebola","hint":"Essa não vai ter dica porque é muito fácil!","lang":"pt"},{"original":"onion","canonical":"onion","hint":"This one won\u0027t have a tip because it\u0027s very easy!","lang":"us"},{"original":"cebula","canonical":"cebula","hint":"Ten nie będzie miał napiwku, bo to bardzo proste!","lang":"pl"}]},{"word":[{"original":"cenoura","canonical":"cenoura","hint":"Essa não vai ter dica porque é muito fácil!","lang":"pt"},{"original":"carrot","canonical":"carrot","hint":"This one won\u0027t have a tip because it\u0027s very easy!","lang":"us"},{"original":"marchew","canonical":"marchew","hint":"Ten nie będzie miał napiwku, bo to bardzo proste!","lang":"pl"}]},{"word":[{"original":"computador","canonical":"computador","hint":"Essa não vai ter dica porque é muito fácil!","lang":"pt"},{"original":"computer","canonical":"computer","hint":"This one won\u0027t have a tip because it\u0027s very easy!","lang":"us"},{"original":"komputer","canonical":"komputer","hint":"Ten nie będzie miał napiwku, bo to bardzo proste!","lang":"pl"}]},{"word":[{"original":"caneca","canonical":"caneca","hint":"Essa não vai ter dica porque é muito fácil!","lang":"pt"},{"original":"mug","canonical":"mug","hint":"This one won\u0027t have a tip because it\u0027s very easy!","lang":"us"},{"original":"kubek","canonical":"kubek","hint":"Ten nie będzie miał napiwku, bo to bardzo proste!","lang":"pl"}]},{"word":[{"original":"animal","canonical":"animal","hint":"Essa não vai ter dica porque é muito fácil!","lang":"pt"},{"original":"animal","canonical":"animal","hint":"This one won\u0027t have a tip because it\u0027s very easy!","lang":"us"},{"original":"zwierzę","canonical":"zwierze","hint":"Ten nie będzie miał napiwku, bo to bardzo proste!","lang":"pl"}]},{"word":[{"original":"brinquedo","canonical":"brinquedo","hint":"É um brinquedo","lang":"pt"},{"original":"toy","canonical":"toy","hint":"It\u0027s a toy","lang":"us"},{"original":"zabawka","canonical":"zabawka","hint":"To jest zabawka","lang":"pl"}]},{"word":[{"original":"cadeira","canonical":"cadeira","hint":"É um móvel(mobilia)","lang":"pt"},{"original":"chair","canonical":"chair","hint":"It\u0027s a furniture","lang":"us"},{"original":"krzesło","canonical":"krzeslo","hint":"To jest meble","lang":"pl"}]},{"word":[{"original":"pão","canonical":"pao","hint":"É de comer","lang":"pt"},{"original":"bread","canonical":"bread","hint":"It\u0027s food","lang":"us"},{"original":"chleb","canonical":"chleb","hint":"To jest jedzenie","lang":"pl"}]},{"word":[{"original":"bola","canonical":"bola","hint":"É um brinquedo","lang":"pt"},{"original":"piłka","canonical":"pilka","hint":"It\u0027s a toy","lang":"us"},{"original":"ball","canonical":"ball","hint":"To jest zabawka","lang":"pl"}]},{"word":[{"original":"banana","canonical":"banana","hint":"É uma fruta","lang":"pt"},{"original":"banana","canonical":"banana","hint":"It\u0027s a fruit","lang":"us"},{"original":"banan","canonical":"banan","hint":"To jest owoce","lang":"pl"}]},{"word":[{"original":"uva","canonical":"uva","hint":"É uma fruta","lang":"pt"},{"original":"grape","canonical":"grape","hint":"It\u0027s a fruit","lang":"us"},{"original":"winogrono","canonical":"winogrono","hint":"To jest owoce","lang":"pl"}]},{"word":[{"original":"limão","canonical":"limao","hint":"É uma fruta","lang":"pt"},{"original":"lemom","canonical":"lemom","hint":"It\u0027s a fruit","lang":"us"},{"original":"cytryna","canonical":"cytryna","hint":"To jest owoce","lang":"pl"}]},{"word":[{"original":"cachorro","canonical":"cachorro","hint":"É um animal","lang":"pt"},{"original":"dog","canonical":"dog","hint":"It\u0027s an animal","lang":"us"},{"original":"pies","canonical":"pies","hint":"To jest zwierzę","lang":"pl"}]},{"word":[{"original":"gato","canonical":"gato","hint":"É um animal","lang":"pt"},{"original":"cat","canonical":"cat","hint":"It\u0027s an animal","lang":"us"},{"original":"kot","canonical":"kot","hint":"To jest zwierzę","lang":"pl"}]},{"word":[{"original":"cavalo","canonical":"cavalo","hint":"É um animal","lang":"pt"},{"original":"horse","canonical":"horse","hint":"It\u0027s an animal","lang":"us"},{"original":"koń","canonical":"kon","hint":"To jest zwierzę","lang":"pl"}]},{"word":[{"original":"repolho","canonical":"repolho","hint":"É um vegetal","lang":"pt"},{"original":"cabage","canonical":"cabage","hint":"It\u0027s a vegetable","lang":"us"},{"original":"kapusta","canonical":"kapusta","hint":"To jest warzywo","lang":"pl"}]},{"word":[{"original":"salsinha","canonical":"salsinha","hint":"É um vegetal","lang":"pt"},{"original":"parsley","canonical":"parsley","hint":"It\u0027s a vegetable","lang":"us"},{"original":"pietruszka","canonical":"pietruszka","hint":"To jest warzywo","lang":"pl"}]},{"word":[{"original":"coentro","canonical":"coentro","hint":"É um vegetal","lang":"pt"},{"original":"cilantro","canonical":"cilantro","hint":"It\u0027s a vegetable","lang":"us"},{"original":"kolendra","canonical":"kolendra","hint":"To jest warzywo","lang":"pl"}]},{"word":[{"original":"pepino","canonical":"pepino","hint":"É um vegetal","lang":"pt"},{"original":"cucumber","canonical":"cucumber","hint":"It\u0027s a vegetable","lang":"us"},{"original":"ogórek","canonical":"ogorek","hint":"To jest warzywo","lang":"pl"}]},{"word":[{"original":"leão","canonical":"leao","hint":"É um animal","lang":"pt"},{"original":"lion","canonical":"lion","hint":"It\u0027s an animal","lang":"us"},{"original":"lew","canonical":"lew","hint":"To jest zwierzę","lang":"pl"}]},{"word":[{"original":"caderno","canonical":"caderno","hint":"Usado para estudar","lang":"pt"},{"original":"notebook","canonical":"notebook","hint":"Used to study","lang":"us"},{"original":"notes","canonical":"notes","hint":"Używany do nauki","lang":"pl"}]},{"word":[{"original":"borracha","canonical":"borracha","hint":"Usado para estudar","lang":"pt"},{"original":"rubber","canonical":"rubber","hint":"Used to study","lang":"us"},{"original":"gumka","canonical":"gumka","hint":"Używany do nauki","lang":"pl"}]}]}`;
 }

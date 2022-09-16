@@ -17,15 +17,18 @@
             <div id="resultLose" style="display: none;" class="fw-bold fs-3 box overlay box-lose"></div>
             <div id="resultWin" style="display: none;" class="fw-bold fs-3 box overlay box-win"></div>
           </div>
+<!-- https://www.w3schools.com/html/tryit.asp?filename=tryhtml_responsive_picture -->
 
+        <div>
+            <img src="img/hint.png" title="Caso informe uma palavra e ela estiver errada você perde o jogo."/>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-6">
-                    <div class="parent-img">
-                        <img class="parent-img-responsible" src="img/forca.png" />
-                        <img id="playerStatus" class="child-img" src="img/0.png" />
+                    <div id="divResponsive" class="parent-responsive">
+                        <img class="parent-img-responsible" src="img/forca.png"/>
+                        <img id="playerStatus" class="body-img" src="img/0.png" />
                     </div>
-                    
 
                 </div>
                 <div class="col-5">
@@ -67,7 +70,7 @@
             <div class="row">
                 <div class="col-8">
                     <div id="sendData" class="input-group">
-                        <input id="inputLetterOrWord" maxlength="1"  required="required" type="text" class="form-control" placeholder="Informe uma letra ou a palavra">
+                        <input id="inputLetterOrWord"  required="required" type="text" class="form-control" placeholder="Informe uma letra ou a palavra">
                         <a href="#" class="btn btn-primary" tabindex="-1" role="button" onclick="send()" >Enviar</a>
                         <a href="#" class="btn btn-success" tabindex="-1" role="button" onclick="restart()" >Novo</a>
                     </div>
