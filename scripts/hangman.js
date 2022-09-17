@@ -34,7 +34,8 @@ function send(){
         return
     }
 
-    if(letter.length == 1 && !hasLetter(letter.toLowerCase())){
+    let hasTheLetter = hasLetter(letter.toLowerCase());
+    if(letter.length == 1 && !hasTheLetter){
         var img = document.getElementById('playerStatus')
         console.log(getCurrentImageStatus())
         img.src = getNextImageName()
@@ -64,10 +65,17 @@ function send(){
         youLose()
     }
     
-    inputedLetters.innerHTML = inputedLetters.innerHTML + letter.toUpperCase() + ", "
-    
+    chooseColor(hasTheLetter, inputedLetters, letter.toUpperCase())
     input.focus()
     input.value = ''
+}
+
+function chooseColor(hasTheLetter, inputedLetters, letter){
+    let label = document.createElement('label')
+    label.innerHTML = letter
+    label.setAttribute('style', 'color:' + (hasTheLetter ? 'lightblue' : 'red'))
+    inputedLetters.appendChild(label)
+    inputedLetters.innerHTML = inputedLetters.innerHTML + ', '
 }
 
 function ifWin(){
