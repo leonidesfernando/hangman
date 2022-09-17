@@ -26,53 +26,62 @@ function restart(){
 
 function send(){
 
-    const input = document.getElementById('inputLetterOrWord')
-    const letter = input.value.trim()
-    var inputedLetters = document.getElementById('inputedLetters')
+    const input = document.getElementById('inputLetterOrWord');
+    const letter = input.value.trim().toLowerCase();
+    var inputedLetters = document.getElementById('inputedLetters');
 
     if(inputedLetters.innerHTML != undefined && inputedLetters.innerHTML.lastIndexOf(letter.toUpperCase()) > -1){
-        return
+        return;
     }
+    
+    if (letter.length == 1 && !hasLetter(letter)){
+        var img = document.getElementById('playerStatus');
+        console.log(getCurrentImageStatus());
+        img.src = getNextImageName();
 
-    let hasTheLetter = hasLetter(letter.toLowerCase());
-    if(letter.length == 1 && !hasTheLetter){
-        var img = document.getElementById('playerStatus')
-        console.log(getCurrentImageStatus())
-        img.src = getNextImageName()
+        chooseColor(false, inputedLetters, letter)
+
     }else if(letter.length > 1){
-        var size = letter.length;
-        var i = 0;
-        var char = letter.charAt(i)
-        while(i < size && hasLetter(char)){
-            char = letter.charAt(++i)
+        let size = letter.length;
+        let matchAll = true;
+        for(let i = 0; i < size; i++){
+            if(!hasLetter(letter.charAt(i))){
+                matchAll = false;
+            }
         }
-        if(i < size){
+
+        if (!matchAll) {
             var img = document.getElementById('playerStatus');
             img.src = LAST_IMAGE;
         }
+        
+        chooseColor(matchAll, inputedLetters, letter)
+
+    } else if (hasLetter(letter.toLowerCase())){
+        chooseColor(true, inputedLetters, letter)
+
     }
 
-    if(ifWin()){
-        document.getElementById('sendData').style = 'display: none'
-        document.getElementById('restart').style = ''
-        youWin()
-    }
-    
+    input.focus()
+    input.value = ''
+
     const hasChance = parseInt(getCurrentImageStatus()) < TOTAL
-    if(!hasChance){
+    if (!hasChance) {
         document.getElementById('sendData').style = 'display: none'
         document.getElementById('restart').style = ''
         youLose()
     }
-    
-    chooseColor(hasTheLetter, inputedLetters, letter.toUpperCase())
-    input.focus()
-    input.value = ''
+
+    else if(ifWin()){
+        document.getElementById('sendData').style = 'display: none'
+        document.getElementById('restart').style = ''
+        youWin()
+    }
 }
 
 function chooseColor(hasTheLetter, inputedLetters, letter){
     let label = document.createElement('label')
-    label.innerHTML = letter
+    label.innerHTML = letter.toUpperCase()
     label.setAttribute('style', 'color:' + (hasTheLetter ? 'lightblue' : 'red'))
     inputedLetters.appendChild(label)
     inputedLetters.innerHTML = inputedLetters.innerHTML + ', '
