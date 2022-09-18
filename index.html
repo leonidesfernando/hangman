@@ -20,7 +20,10 @@
 <!-- https://www.w3schools.com/html/tryit.asp?filename=tryhtml_responsive_picture -->
 
         <div>
-            <img src="img/hint.png" title="Caso informe uma palavra e ela estiver errada você perde o jogo."/>
+            <img src="img/hint.png" 
+             data-bs-toggle="popover" data-bs-trigger="hover focus" title="Atenção/Uwaga/Attention"
+                data-bs-content="Caso informe uma palavra e ela estiver errada você perde o jogo."/>
+
         </div>
         <div class="container-fluid">
             <div class="row">
@@ -80,11 +83,28 @@
 
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         
         <script src="scripts/hangman.js"></script> 
 
         <script>
+
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                
+                    return new bootstrap.Popover(popoverTriggerEl)
+                
+            })
+
+            /*var popoverTriggerList = [].slice.call(document.querySelectorAll('[dy-data-bs-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                this.addEventListener('mouseover', (event) => { 
+                    return new bootstrap.Popover(popoverTriggerEl)
+                });
+
+            })*/
+
 
             var input = document.getElementById('inputLetterOrWord')
             
@@ -95,6 +115,8 @@
                     check();
                 }
             });
+
+
             start();
         </script>
     </body>

@@ -162,7 +162,9 @@ function getInputTableContent(wordLang, index){
 }
 
 function updateTableWithLetter(wordLang, index){
-    document.getElementById(`${wordLang.lang}RowLetter${index}`).value = wordLang.original.charAt(index).toUpperCase()
+    const item = document.getElementById(`${wordLang.lang}RowLetter${index}`);
+    item.value = wordLang.original.charAt(index).toUpperCase();
+    item.style['background'] = 'lightcyan';
 }
 
 function generateTables(word){
@@ -176,13 +178,24 @@ function generateTables(word){
 function generateHints(language, hint){
 
     const row = document.getElementById(`${language}Row`);
-    const td = document.createElement('td')
-    const img = document.createElement('img')
+    const td = document.createElement('td');
+    const img = document.createElement('img');
     img.innerText = hint
-    img.setAttribute('src', 'img/hint-ideia.png')
-    img.setAttribute('title', hint)
-    td.appendChild(img)
-    row.appendChild(td)
+    img.setAttribute('src', 'img/hint-ideia.png');
+    img.setAttribute('title', hint);
+    
+    /*img.setAttribute('tabindex', 0);
+    img.setAttribute('title', '');
+    img.setAttribute('data-bs-toggle', 'popover');
+    img.setAttribute('dy-data-bs-toggle', 'popover');
+    img.setAttribute('data-bs-trigger', 'hover focus');
+    img.setAttribute('data-bs-original-title', 'Dica/Hint/Porady');
+    img.setAttribute('aria-label', 'Dica/Hint/Porady');
+    img.setAttribute('data-bs-content', hint);*/
+    
+    
+    td.appendChild(img);
+    row.appendChild(td);
 }
 
 function generateTableByLanguage(language, orignalWord){
