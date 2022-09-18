@@ -3,6 +3,13 @@
   height: auto;
 }
 
+.icon-flag-img{
+    height: auto;
+    width: auto;
+    max-width: 25px;
+    max-height: 25px;
+}
+
 @media screen and (max-width: 799px) {
 .parent-img {
     position: relative;

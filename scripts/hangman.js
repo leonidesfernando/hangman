@@ -170,12 +170,34 @@ function updateTableWithLetter(wordLang, index){
 function generateTables(word){
     
     for(w in word){
-        generateHints(word[w].lang, word[w].hint)
-        generateTableByLanguage(word[w].lang, word[w].original)
+        //generateHints(word[w].lang, word[w].hint)
+        generateTableByLanguage(word[w].lang, word[w].original);
+    }
+    generateHints(word);
+}
+
+function generateHints(word) {
+    let hint = '<ul>';
+    const img = document.getElementById('hint');
+    for (w in word) {
+        hint += `<li><img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/>: ${word[w].hint}</li>`;
+    }
+    hint += '</ul>'
+    img.setAttribute('data-bs-content', hint);
+}
+
+function getImageByLanguage(lang){
+    switch(lang){
+        case 'pt':
+            return 'img/brazil.png';
+        case 'pl':
+            return 'img/poland.png';
+        case 'us':
+            return 'img/usa.png'
     }
 }
 
-function generateHints(language, hint){
+function generateHintsOld(language, hint){
 
     const row = document.getElementById(`${language}Row`);
     const td = document.createElement('td');
