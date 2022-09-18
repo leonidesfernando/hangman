@@ -24,7 +24,7 @@ function restart(){
     location.reload()
 }
 
-function send(){
+function check(){
 
     const input = document.getElementById('inputLetterOrWord');
     const letter = input.value.trim().toLowerCase();
@@ -34,34 +34,7 @@ function send(){
         return;
     }
     
-    if (letter.length == 1 && !hasLetter(letter)){
-        var img = document.getElementById('playerStatus');
-        console.log(getCurrentImageStatus());
-        img.src = getNextImageName();
-
-        chooseColor(false, inputedLetters, letter)
-
-    }else if(letter.length > 1){
-        let size = letter.length;
-        let matchAll = true;
-        for(let i = 0; i < size; i++){
-            if(!hasLetter(letter.charAt(i))){
-                matchAll = false;
-            }
-        }
-
-        if (!matchAll) {
-            var img = document.getElementById('playerStatus');
-            img.src = LAST_IMAGE;
-        }
-        
-        chooseColor(matchAll, inputedLetters, letter)
-
-    } else if (hasLetter(letter.toLowerCase())){
-        chooseColor(true, inputedLetters, letter)
-
-    }
-
+    checkLetterOrWord(inputedLetters, letter);
     input.focus()
     input.value = ''
 
@@ -77,6 +50,33 @@ function send(){
         document.getElementById('restart').style = ''
         youWin()
     }
+}
+
+function checkLetterOrWord(inputedLetters, letter){
+    let img = document.getElementById('playerStatus');
+    let hasTheLetter = false;
+    if (letter.length == 1 && !hasLetter(letter)) {
+        console.log(getCurrentImageStatus());
+        img.src = getNextImageName();
+    } else if (letter.length > 1) {
+        let size = letter.length;
+        let matchAll = true;
+        for (let i = 0; i < size; i++) {
+            if (!hasLetter(letter.charAt(i))) {
+                matchAll = false;
+            }
+        }
+
+        if (!matchAll) {
+            img.src = LAST_IMAGE;
+        }
+
+        hasTheLetter = matchAll;
+
+    } else if (hasLetter(letter.toLowerCase())) {
+        hasTheLetter = true;
+    }
+    chooseColor(hasTheLetter, inputedLetters, letter);
 }
 
 function chooseColor(hasTheLetter, inputedLetters, letter){

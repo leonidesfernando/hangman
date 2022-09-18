@@ -71,7 +71,7 @@
                 <div class="col-8">
                     <div id="sendData" class="input-group">
                         <input id="inputLetterOrWord"  required="required" type="text" class="form-control" placeholder="Informe uma letra ou a palavra">
-                        <a href="#" class="btn btn-primary" tabindex="-1" role="button" onclick="send()" >Enviar</a>
+                        <a href="#" class="btn btn-primary" tabindex="-1" role="button" onclick="check()" >Enviar</a>
                         <a href="#" class="btn btn-success" tabindex="-1" role="button" onclick="restart()" >Novo</a>
                     </div>
                     <a href="#" id="restart" class="btn btn-success btn-lg" style="display: none ;" tabindex="-1" role="button" onclick="restart()" >Jogar novamente</a>
@@ -92,7 +92,7 @@
   
                 if (event.key === "Enter") {
                     event.preventDefault();
-                    send()
+                    check();
                 }
             });
             start();
