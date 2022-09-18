@@ -170,7 +170,6 @@ function updateTableWithLetter(wordLang, index){
 function generateTables(word){
     
     for(w in word){
-        //generateHints(word[w].lang, word[w].hint)
         generateTableByLanguage(word[w].lang, word[w].original);
     }
     generateHints(word);
@@ -197,28 +196,6 @@ function getImageByLanguage(lang){
     }
 }
 
-function generateHintsOld(language, hint){
-
-    const row = document.getElementById(`${language}Row`);
-    const td = document.createElement('td');
-    const img = document.createElement('img');
-    img.innerText = hint
-    img.setAttribute('src', 'img/hint-ideia.png');
-    img.setAttribute('title', hint);
-    
-    /*img.setAttribute('tabindex', 0);
-    img.setAttribute('title', '');
-    img.setAttribute('data-bs-toggle', 'popover');
-    img.setAttribute('dy-data-bs-toggle', 'popover');
-    img.setAttribute('data-bs-trigger', 'hover focus');
-    img.setAttribute('data-bs-original-title', 'Dica/Hint/Porady');
-    img.setAttribute('aria-label', 'Dica/Hint/Porady');
-    img.setAttribute('data-bs-content', hint);*/
-    
-    
-    td.appendChild(img);
-    row.appendChild(td);
-}
 
 function generateTableByLanguage(language, orignalWord){
     let len = orignalWord.length
