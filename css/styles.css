@@ -48,7 +48,7 @@
   /*** for the result */
   .box {
     width: 40%;
-    height: 45%;
+    height: 35%;
     position: absolute;
     top: 38%;
     left: 30%;
@@ -110,9 +110,9 @@
   /*** for the result */
   .box {
     width: 40%;
-    height: 37%;
+    height: 30%;
     position: absolute;
-    top: 38%;
+    top: 40%;
     left: 30%;
     opacity: 0.94;
     /*background: #0057e3;*/
