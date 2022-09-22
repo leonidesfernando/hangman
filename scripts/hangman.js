@@ -133,9 +133,19 @@ function youWin(){
 }
 
 function youLose(){
-    var words = `A palavra era: ${word[0].original} em ${word[0].lang}, ${word[1].original} em ${word[1].lang} e ${word[2].original} em ${word[2].lang}. `;
-    showFinalMessage(words + 'Não foi dessa vez! Tente outra novamente, a prática te leva à perfeição!',
-    	   document.getElementById('resultLose'))
+    //var words = `A palavra era: ${word[0].original} em ${word[0].lang}, ${word[1].original} em ${word[1].lang} e ${word[2].original} em ${word[2].lang}. `;
+    let table = "<table><tr>";
+    let langs = ""//`<table><tr><td><a href='#'> <img class='icon-flag-img' src='img/brazil.png'/> </a></td></tr></table>`;
+    let hint = '<label>A palavara era:</label> <ul>';
+    //const img = document.getElementById('hint');
+    for (w in word) {
+        langs += `<td><a href='#'> <img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/> </a></td>`
+        hint += `<li><img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/>: ${word[w].original}</li>`;
+    }
+    hint += '</ul>';
+    table += langs + "</tr></table>";
+    showFinalMessage(table + hint + '<label class="fw-bold">Não foi dessa vez! Tente outra novamente, a prática te leva à perfeição!</label>',
+    	   document.getElementById('resultLose'));
 }
 
 function showFinalMessage(msg, result){
@@ -211,7 +221,7 @@ function generateHints(word) {
     for (w in word) {
         hint += `<li><img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/>: ${word[w].hint}</li>`;
     }
-    hint += '</ul>'
+    hint += '</ul>';
     img.setAttribute('data-bs-content', hint);
 }
 
