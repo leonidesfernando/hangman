@@ -35,6 +35,7 @@ function check(){
         return;
     }
     
+    disableHowToFinalizeTheGame();
     checkLetterOrWord(inputedLetters, letter);
     input.focus();
     input.value = '';
@@ -42,27 +43,61 @@ function check(){
     checkIfWinOrLose();
 }
 
+function disableHowToFinalizeTheGame(){
+    document.getElementById("allWords").disabled = true;
+}
+
 function checkIfWinOrLose(){
     const allWords = document.getElementById('allWords');
     const hasChance = parseInt(getCurrentImageStatus()) < TOTAL;
     if(allWords.checked){
-        //TODO: criar um metodo para verificar se todas as palavras foram preenchidas e nao apenas uma olhar a funcao: ifWin()
+        checkWinOrLoseWithAllWordsFilledOut(hasChance);
     }else{
         checkWinOrLoseOnlyOneWordIsEnough(hasChance);
     }
 }
 
+function checkWinOrLoseWithAllWordsFilledOut(hasChance){
+    if(!hasChance){
+        hideInputAndDisplayRestart();
+        youLose();
+    }
+    else if(ifWinWithAllWords()){
+        hideInputAndDisplayRestart();
+        youWin();
+    }
+}
+
+function ifWinWithAllWords(){
+    let filedOutAnllWords = false;
+    for(let w in word){
+        filedOutAnllWords = true;
+        
+        const lenByLang = parseInt(word[w].original.length)
+        for(let i = 0; i < lenByLang; i++){
+            if(getInputTableContent(word[w], i) == ''){
+                filedOutAnllWords = false;
+                break;
+            }
+        }
+    }
+    return filedOutAnllWords;
+}
+
+function hideInputAndDisplayRestart(){
+    document.getElementById('sendData').style = 'display: none';
+    document.getElementById('restart').style = '';
+}
+
 function checkWinOrLoseOnlyOneWordIsEnough(hasChance){
     
     if (!hasChance) {
-        document.getElementById('sendData').style = 'display: none';
-        document.getElementById('restart').style = '';
+        hideInputAndDisplayRestart();
         youLose();
     }
 
     else if (ifWin()) {
-        document.getElementById('sendData').style = 'display: none';
-        document.getElementById('restart').style = '';
+        hideInputAndDisplayRestart();
         youWin();
     }
 }
@@ -95,11 +130,11 @@ function checkLetterOrWord(inputedLetters, letter){
 }
 
 function chooseColor(hasTheLetter, inputedLetters, letter){
-    let label = document.createElement('label')
-    label.innerHTML = letter.toUpperCase()
-    label.setAttribute('style', 'color:' + (hasTheLetter ? 'lightblue' : 'red'))
+    let label = document.createElement('label');
+    label.innerHTML = letter.toUpperCase();
+    label.setAttribute('style', 'color:' + (hasTheLetter ? 'lightblue' : 'red'));
     inputedLetters.appendChild(label)
-    inputedLetters.innerHTML = inputedLetters.innerHTML + ', '
+    inputedLetters.innerHTML = inputedLetters.innerHTML + ', ';
 }
 
 function ifWin(){

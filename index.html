@@ -71,12 +71,10 @@
 
             <div class="row">
                 <div class="col-3 form-check" style="margin-left: 20px;">
-                        <input class="form-check-input" type="checkbox" disabled value="allWords" id="allWords">
+                        <input class="form-check-input" type="checkbox" checked value="allWords" id="allWords">
                         <label class="form-check-label" for="allWords">
                             Finalizar o jogo quando acertar em todos o idiomas
                         </label>
-
-
                 </div>
             </div>
 
@@ -92,7 +90,7 @@
             <div class="row">
                 <div class="col-8">
                     <div id="sendData" class="input-group">
-                        <input id="inputLetterOrWord"  required="required" type="text" class="form-control" placeholder="Informe uma letra ou a palavra">
+                        <input id="inputLetterOrWord"  required="required" type="text" class="form-control" placeholder="Informe uma letra ou a palavra SEM acento">
                         <a href="#" class="btn btn-primary" tabindex="-1" role="button" onclick="check()" >Enviar</a>
                         <a href="#" class="btn btn-success" tabindex="-1" role="button" onclick="restart()" >Novo</a>
                     </div>
