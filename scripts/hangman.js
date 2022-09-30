@@ -1,22 +1,14 @@
-
-//import localDataBase from './database.json'
-//import {getDatabase as database } from './scripts/database.js'
-
-//var database = require('getDatabase')
-
-//console.log(JSON.stringify(localDataBase))
-
-const data =  JSON.parse(getDatabaseNew())
-const word = generateWord(data)
-const TOTAL = 7
-const LAST_IMAGE = 'img/7.png'
+const data =  JSON.parse(getDatabaseNew());
+const word = generateWord();
+const TOTAL = 7;
+const LAST_IMAGE = 'img/7.png';
 
 function start(){
-    console.log('no start')
-    console.log(word)
+    console.log('no start');
+    console.log(word);
 
-    generateTables(word)
-    var input = document.getElementById('inputLetterOrWord')
+    generateTables(word);
+    const input = document.getElementById('inputLetterOrWord');
     input.focus();
 }
 
@@ -169,7 +161,7 @@ function youLose(){
     let langs = ""
     let hint = '<label>A palavara era:</label> <ul>';
     
-    for (w in word) {
+    for (let w in word) {
         langs += `<td><a href='#'> <img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/> </a></td>`
         hint += `<li><img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/>: ${word[w].original}</li>`;
     }
@@ -180,7 +172,7 @@ function youLose(){
 }
 
 function showFinalMessage(msg, result){
-    var div  = document.createElement('div')
+    const div  = document.createElement('div')
     div.setAttribute('style', 'margin: 10px')
     result.appendChild(div)
     div.innerHTML = msg;
@@ -189,21 +181,21 @@ function showFinalMessage(msg, result){
 
 function generateWord(){
     //TODO: criar cookie com local data, hora  milisegundo e armezenar os indices gerados e desconsiderar esses indices para pegar uma nova palavra
-    var len = data.words.length
+    const len = data.words.length
     console.log('len: ' +len)
-    var index = Math.floor(Math.random() * len);
+    const index = Math.floor(Math.random() * len);
     console.log('index: ' + index)
     return data.words[index].word
 }
 
 function hasLetter(letter){
     
-    var hasAnyLetter = false
+    let hasAnyLetter = false
 
-    for(var w in word){
+    for(let w in word){
         const lengWord = parseInt(word[w].canonical.length)
-        for(var i = 0; i < lengWord; i++){
-            var char = word[w].canonical.charAt(i)
+        for(let i = 0; i < lengWord; i++){
+            const char = word[w].canonical.charAt(i)
             if(char == letter){
                 updateTableWithLetter(word[w], i)
                 hasAnyLetter = true
@@ -226,7 +218,7 @@ function updateTableWithLetter(wordLang, index){
 function generateTables(word){
     
     const colspan = getSizeLargestWord(word)
-    for(w in word){
+    for(let w in word){
         generateTableByLanguage(word[w].lang, word[w].original, colspan);
     }
     generateHints(word);
@@ -235,7 +227,7 @@ function generateTables(word){
 function getSizeLargestWord(word){
     let smallest = 0;
     let biggest = 0;
-    for (w in word) {
+    for (let w in word) {
         if (biggest < word[w].canonical.length){
             biggest = word[w].canonical.length;
         }
@@ -249,7 +241,7 @@ function getSizeLargestWord(word){
 function generateHints(word) {
     let hint = '<ul>';
     const img = document.getElementById('hint');
-    for (w in word) {
+    for (const w in word) {
         hint += `<li><img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/>: ${word[w].hint}</li>`;
     }
     hint += '</ul>';
@@ -273,7 +265,7 @@ function generateTableByLanguage(language, orignalWord, colspan){
 
     const row = document.getElementById(`${language}Row`);
     let td;
-    for(var i = 0; i < len; i++){
+    for(let i = 0; i < len; i++){
         td = document.createElement('td');
         
         const input = document.createElement( orignalWord.charAt(i) == ' ' ? 'span' : 'input');
@@ -286,16 +278,16 @@ function generateTableByLanguage(language, orignalWord, colspan){
 
 
 function configureInput(input, language, index){
-    input.setAttribute('id', `${language}RowLetter${index}`)
-    input.setAttribute('size', 1)
-    input.setAttribute('maxlength', 1)
-    input.setAttribute('class', 'text-center')
-    input.setAttribute('disabled',true)
-    input.setAttribute('style', 'border-bottom: 4px solid; font-weight: bold;')
+    input.setAttribute('id', `${language}RowLetter${index}`);
+    input.setAttribute('size', 1);
+    input.setAttribute('maxlength', 1);
+    input.setAttribute('class', 'text-center');
+    input.setAttribute('disabled',true);
+    input.setAttribute('style', 'border-bottom: 4px solid; font-weight: bold;');
 }
 
 function getNextImageName(){
-    var number = parseInt(getCurrentImageStatus())
+    let number = parseInt(getCurrentImageStatus());
     if(number < TOTAL){
         number++;
     }
@@ -304,7 +296,7 @@ function getNextImageName(){
 }
 
 function getCurrentImageStatus(){
-    var img = document.getElementById('playerStatus')
+    const img = document.getElementById('playerStatus')
     return img.src.substring(img.src.lastIndexOf('/')+1).split('.')[0];
 }
 
@@ -314,279 +306,6 @@ function getCurrentImageStatus(){
 function getDatabase() {
 
     return `{"words":[{"word":[{"original":"carne","canonical":"carne","hint":"NO_HINT_TOO_EASY","lang":"pt"},{"original":"meat","canonical":"meat","hint":"NO_HINT_TOO_EASY","lang":"us"},{"original":"mięso","canonical":"mieso","hint":"NO_HINT_TOO_EASY","lang":"pl"}]},{"word":[{"original":"pato","canonical":"pato","hint":"NO_HINT_TOO_EASY","lang":"pt"},{"original":"duck","canonical":"duck","hint":"NO_HINT_TOO_EASY","lang":"us"},{"original":"kaczka","canonical":"kaczka","hint":"NO_HINT_TOO_EASY","lang":"pl"}]}]}`;
-    
-    /*return `{
-        "words":
-        [
-            {
-                "word":[
-                    {
-                        "original": "carne",
-                        "canonical": "carne",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "mięso",
-                        "canonical": "mieso",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "meat",
-                        "canonical": "meat",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "cebola",
-                        "canonical": "cebola",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "cebula",
-                        "canonical": "cebula",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "onion",
-                        "canonical": "onion",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "moeda",
-                        "canonical": "moeda",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "moneta",
-                        "canonical": "moneta",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "coin",
-                        "canonical": "coin",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "preto",
-                        "canonical": "preto",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "czarny",
-                        "canonical": "czarny",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "black",
-                        "canonical": "black",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "salsinha",
-                        "canonical": "salsinha",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "pietruszka",
-                        "canonical": "pietruszka",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "parsley",
-                        "canonical": "parsley",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "faca",
-                        "canonical": "faca",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "nóż",
-                        "canonical": "noz",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "knife",
-                        "canonical": "knife",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "cenoura",
-                        "canonical": "cenoura",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "marchew",
-                        "canonical": "marchew",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "carrot",
-                        "canonical": "carrot",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "grande",
-                        "canonical": "grande",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "duże",
-                        "canonical": "duze",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "big",
-                        "canonical": "big",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "leão",
-                        "canonical": "leao",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "lew",
-                        "canonical": "lew",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "lion",
-                        "canonical": "lion",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "cachorro",
-                        "canonical": "cachorro",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "pies",
-                        "canonical": "pies",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "dog",
-                        "canonical": "dog",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "internet",
-                        "canonical": "internet",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "internet",
-                        "canonical": "internet",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "internet",
-                        "canonical": "internet",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "pepino",
-                        "canonical": "pepino",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "ogórek",
-                        "canonical": "ogorek",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "cucumber",
-                        "canonical": "cucumber",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "uva",
-                        "canonical": "uva",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "winogrono",
-                        "canonical": "winogrono",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "grape",
-                        "canonical": "grape",
-                        "lang": "us"
-                    }
-                ]
-            },
-            {
-                "word":[
-                    {
-                        "original": "bandeira",
-                        "canonical": "bandeira",
-                        "lang": "pt"
-                    },
-                    {
-                        "original": "flag",
-                        "canonical": "flag",
-                        "lang": "pl"
-                    },
-                    {
-                        "original": "flaga",
-                        "canonical": "flaga",
-                        "lang": "us"
-                    }
-                ]
-            }
-        ]
-    }`; 
-    */
 }
 
 
