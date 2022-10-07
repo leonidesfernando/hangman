@@ -4,8 +4,7 @@ const TOTAL = 7;
 const LAST_IMAGE = 'img/7.png';
 
 function start(){
-    console.log('no start');
-    console.log(word);
+    console.log('no start: ', word);
 
     generateTables(word);
     const input = document.getElementById('inputLetterOrWord');
@@ -182,9 +181,9 @@ function showFinalMessage(msg, result){
 function generateWord(){
     //TODO: criar cookie com local data, hora  milisegundo e armezenar os indices gerados e desconsiderar esses indices para pegar uma nova palavra
     const len = data.words.length
-    console.log('len: ' +len)
+    console.log('len:', len)
     const index = Math.floor(Math.random() * len);
-    console.log('index: ' + index)
+    console.log('index:', index)
     return data.words[index].word
 }
 

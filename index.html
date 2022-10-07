@@ -11,11 +11,38 @@
 
         <title>Hangman</title>
         <script src="scripts/hangman.js" defer></script>
+        <script src="scripts/language.js" defer></script>
         
 
     </head>
 
     <body>
+
+        <div class="container">
+            
+            <div class="container-fluid">
+                <div class="form-check form-check-inline">
+                    <h3><label id="language"></label></h3>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="options" class="form-check-input" 
+                        onclick="setTexts('langBR')"
+                        style="background-image: url(img/brazil-circle.png); height: 32px; width: 32px;" id="langBR" autocomplete="off" checked>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="options" class="form-check-input" 
+                        onclick="setTexts('langPL')"
+                        style="background-image: url(img/poland-cricle.png); height: 32px; width: 32px;" id="langPL" autocomplete="off" >
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="options" class="form-check-input" 
+                        onclick="setTexts('langUS')"
+                        style="background-image: url(img/usa-circle.png); height: 32px; width: 32px;" id="langUS" autocomplete="off" >
+                </div>
+        </div>
+        </div>
     
         <div class="container">
             <div id="resultLose" style="display: none;" class="fs-5 box overlay box-lose"></div>
@@ -23,8 +50,8 @@
           </div>
 <!-- https://www.w3schools.com/html/tryit.asp?filename=tryhtml_responsive_picture -->
 
-        <div>
-            <img src="img/hint.png" alt=""
+        <div id="hintGameDiv">
+            <img src="img/hint.png"  id="hintGameImg" alt=""
              data-bs-toggle="popover" data-bs-trigger="hover focus" title="Atenção/Uwaga/Attention"
              data-bs-html="true"
              data-bs-content="<ul><li>Caso informe uma palavra e ela estiver errada você perde o jogo.</li></ul>"/>
@@ -72,7 +99,7 @@
             <div class="row">
                 <div class="col-3 form-check" style="margin-left: 20px;">
                         <input class="form-check-input" type="checkbox" checked value="allWords" id="allWords">
-                        <label class="form-check-label" for="allWords">
+                        <label class="form-check-label" for="allWords" id="labelAllWords">
                             Finalizar o jogo quando acertar em todos o idiomas
                         </label>
                 </div>
@@ -132,8 +159,25 @@
                 }
             });
 
+            /*
+$(document).ready(function(){
+    $("#searchBar").click(function(){
+        $("#searchPredict").popover();
+        //Bootstrap below 5
+        // $('#searchPredict').attr('data-original-title', "testing123");
+        //Bootstrap 5+
+        $('#searchPredict').attr('data-bs-original-title', "testing123");
+    });
+});
+            */
+
             document.addEventListener("DOMContentLoaded", function(){
                 start();  
+                const choosedLang = document.querySelector('input[name="options"]:checked').attributes["id"].value;
+                setTexts(choosedLang);
+                const hint = `<ul><li>${getLangMessages(choosedLang).hintGame}.</li></ul>`;
+                //console.log('data bs content', document.getElementById("hintGameImg").attributes["data-bs-content"].value);
+                document.getElementById("hintGameImg").attributes["data-bs-content"].value = hint;
             });
 
 
