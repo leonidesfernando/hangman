@@ -10,7 +10,7 @@ class Messages{
     }
 }
 
-const portuguese = new Messages("Jogue em Português", 
+const portuguese = new Messages("Clique na bandeira para mudar o idioma", 
     "Caso informe uma palavra e ela estiver errada você perde o jogo.",
     "Letras informadas",
     "Finalizar o jogo somente quando acertar em todos o idiomas",
@@ -18,7 +18,7 @@ const portuguese = new Messages("Jogue em Português",
     "Enviar",
     "Novo");
 
-const polish = new Messages("Graj po Polsku",
+const polish = new Messages("Kliknij flagę, aby zmienić język",
     "Jeśli wpiszesz słowo, które jest błędne, przegrywasz grę.",
     "Poinformowane listy", 
     "Zakończ grę tylko wtedy, gdy zrozumiesz ją poprawnie we wszystkich językach",
@@ -26,7 +26,7 @@ const polish = new Messages("Graj po Polsku",
     "Wysłać",
     "Nowy");
 
-const usa = new Messages("Play in English", 
+const usa = new Messages("Click on the flag to change the language", 
     "In case you inform the wrong word, you lose the game.",
     "Informed letters", "Finish the game only when you get it right in all languages",
     "Inform a letter or a word WITHOUT an accent", "Send", "New");
@@ -50,6 +50,11 @@ function setTexts(choosedLang) {
     setLanguage(lang);
     setLabelAllWords(lang);
     setHintGame(lang);
+    setInputedLetters(lang);
+}
+
+function setInputedLetters(lang){
+    set("inputedLettersTitle", lang.informedLetters);
 }
 
 function setLanguage(lang){
