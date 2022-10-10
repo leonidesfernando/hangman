@@ -18,30 +18,32 @@
 
     <body>
 
-        <div class="container">
+        <div class="container-fluid">
             
-            <div class="container-fluid">
+            
                 <div class="form-check form-check-inline">
                     <h5><label id="language"></label></h5>
                 </div>
+            
+
+        <div class="container-fluid">
                 <div class="form-check form-check-inline">
                     <input type="radio" name="options" class="form-check-input" 
                         onclick="setTexts('langBR')"
-                        style="background-image: url(img/brazil-circle.png); height: 32px; width: 32px;" id="langBR" autocomplete="off" checked>
+                        style="background-image: url(img/brazil-circle.png); height: 28px; width: 28px;" id="langBR" autocomplete="off" checked>
                 </div>
 
                 <div class="form-check form-check-inline">
                     <input type="radio" name="options" class="form-check-input" 
                         onclick="setTexts('langPL')"
-                        style="background-image: url(img/poland-cricle.png); height: 32px; width: 32px;" id="langPL" autocomplete="off" >
+                        style="background-image: url(img/poland-cricle.png); height: 28px; width: 28px;" id="langPL" autocomplete="off" >
                 </div>
 
                 <div class="form-check form-check-inline">
                     <input type="radio" name="options" class="form-check-input" 
                         onclick="setTexts('langUS')"
-                        style="background-image: url(img/usa-circle.png); height: 32px; width: 32px;" id="langUS" autocomplete="off" >
+                        style="background-image: url(img/usa-circle.png); height: 28px; width: 28px;" id="langUS" autocomplete="off" >
                 </div>
-        </div>
         </div>
     
         <div class="container">
@@ -96,14 +98,21 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-3 form-check" style="margin-left: 20px;">
-                        <input class="form-check-input" type="checkbox" checked value="allWords" id="allWords">
-                        <label class="form-check-label" for="allWords" id="labelAllWords">
-                            Finalizar o jogo quando acertar em todos o idiomas
-                        </label>
+            <div class="">
+                <div class="container"></div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="form-check" >
+                            <input class="form-check-input" type="checkbox" checked value="allWords" id="allWords">
+                            <label class="form-check-label" for="allWords" id="labelAllWords">
+                                Finalizar o jogo quando acertar em todos o idiomas
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
 
             <div class="row">
                 <div class="col-3">
@@ -118,8 +127,8 @@
                 <div class="col-8">
                     <div id="sendData" class="input-group">
                         <input id="inputLetterOrWord"  required="required" type="text" class="form-control" placeholder="Informe uma letra ou a palavra SEM acento">
-                        <a href="#" class="btn btn-primary" tabindex="-1" role="button" onclick="check()" >Enviar</a>
-                        <a href="#" class="btn btn-success" tabindex="-1" role="button" onclick="restart()" >Novo</a>
+                        <a href="#" class="btn btn-primary" tabindex="-1" role="button" id="btnSend" onclick="check()" >Enviar</a>
+                        <a href="#" class="btn btn-success" tabindex="-1" role="button" id="btnNew" onclick="restart()" >Novo</a>
                     </div>
                     <a href="#" id="restart" class="btn btn-success btn-lg" style="display: none ;" tabindex="-1" role="button" onclick="restart()" >Jogar novamente</a>
                 </div>
@@ -140,14 +149,6 @@
                 
             })
 
-            /*var popoverTriggerList = [].slice.call(document.querySelectorAll('[dy-data-bs-toggle="popover"]'))
-            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-                this.addEventListener('mouseover', (event) => { 
-                    return new bootstrap.Popover(popoverTriggerEl)
-                });
-
-            })*/
-
 
             var input = document.getElementById('inputLetterOrWord')
             
@@ -159,25 +160,11 @@
                 }
             });
 
-            /*
-$(document).ready(function(){
-    $("#searchBar").click(function(){
-        $("#searchPredict").popover();
-        //Bootstrap below 5
-        // $('#searchPredict').attr('data-original-title', "testing123");
-        //Bootstrap 5+
-        $('#searchPredict').attr('data-bs-original-title', "testing123");
-    });
-});
-            */
 
             document.addEventListener("DOMContentLoaded", function(){
                 start();  
                 const choosedLang = document.querySelector('input[name="options"]:checked').attributes["id"].value;
-                setTexts(choosedLang);
-                const hint = `<ul><li>${getLangMessages(choosedLang).hintGame}.</li></ul>`;
-                //console.log('data bs content', document.getElementById("hintGameImg").attributes["data-bs-content"].value);
-                document.getElementById("hintGameImg").attributes["data-bs-content"].value = hint;
+                setTexts(choosedLang);                
             });
 
 

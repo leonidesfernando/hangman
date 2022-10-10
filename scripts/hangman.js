@@ -7,6 +7,10 @@ function start(){
     console.log('no start: ', word);
 
     generateTables(word);
+    setFocus();
+}
+
+function setFocus(){
     const input = document.getElementById('inputLetterOrWord');
     input.focus();
 }

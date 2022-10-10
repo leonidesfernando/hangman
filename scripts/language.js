@@ -44,13 +44,31 @@ function getLangMessages(choosedLang) {
 }
 
 
-
-function setTexts(choosedLang) {
+async function setTexts(choosedLang) {
     const lang = getLangMessages(choosedLang);
     setLanguage(lang);
     setLabelAllWords(lang);
     setHintGame(lang);
     setInputedLetters(lang);
+    setInputPlaceHolder(lang);
+    setBtnSend(lang);
+    setBtnNew(lang);
+
+    //TODO: always the last one
+    //document.getElementById('inputLetterOrWord').focus();
+    setFocus();
+}
+
+function setBtnNew(lang){
+    set("btnNew", lang.newGame)
+}
+
+function setBtnSend(lang){
+    set("btnSend", lang.sendButton);
+}
+
+function setInputPlaceHolder(lang){
+    setAttr("inputLetterOrWord", "placeholder", lang.inputPlaceHolder);
 }
 
 function setInputedLetters(lang){
@@ -63,7 +81,7 @@ function setLanguage(lang){
 
 function setHintGame(lang) {
     const hint = `<ul><li>${lang.hintGame}.</li></ul>`;
-    document.getElementById("hintGameImg").attributes["data-bs-content"].value = hint;
+    setAttr("hintGameImg", "data-bs-content", hint);
 }
 
 
@@ -73,4 +91,8 @@ function setLabelAllWords(lang) {
 
 function set(id, val){
     document.getElementById(id).innerText = val;
+}
+
+function setAttr(id, attrName, val){
+    document.getElementById(id).attributes[attrName].value = val;
 }
