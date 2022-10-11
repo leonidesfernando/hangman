@@ -30,7 +30,7 @@
                 <div class="form-check form-check-inline">
                     <input type="radio" name="options" class="form-check-input" 
                         onclick="setTexts('langBR')"
-                        style="background-image: url(img/brazil-circle.png); height: 28px; width: 28px;" id="langBR" autocomplete="off" checked>
+                        style="background-image: url(img/brazil-circle.png); height: 28px; width: 28px;" id="langBR" autocomplete="off">
                 </div>
 
                 <div class="form-check form-check-inline">
@@ -42,7 +42,7 @@
                 <div class="form-check form-check-inline">
                     <input type="radio" name="options" class="form-check-input" 
                         onclick="setTexts('langUS')"
-                        style="background-image: url(img/usa-circle.png); height: 28px; width: 28px;" id="langUS" autocomplete="off" >
+                        style="background-image: url(img/usa-circle.png); height: 28px; width: 28px;" id="langUS" autocomplete="off" checked>
                 </div>
         </div>
     
@@ -131,6 +131,14 @@
                         <a href="#" class="btn btn-success" tabindex="-1" role="button" id="btnNew" onclick="restart()" >Novo</a>
                     </div>
                     <a href="#" id="restart" class="btn btn-success btn-lg" style="display: none ;" tabindex="-1" role="button" onclick="restart()" >Jogar novamente</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8">
+                    <div class="alert alert-warning" id="letterAlreadyInformedDiv" style="display: none;" role="alert">
+                        <h5 id="letterAlreadyInformedText"></h5>
+                    </div>
                 </div>
             </div>
 

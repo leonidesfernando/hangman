@@ -19,6 +19,10 @@ function restart(){
     location.reload()
 }
 
+function getChoosedLang(){
+    return document.querySelector('input[name="options"]:checked').attributes["id"].value;
+}
+
 function check(){
 
     const input = document.getElementById('inputLetterOrWord');
@@ -26,10 +30,20 @@ function check(){
     const inputedLetters = document.getElementById('inputedLetters');
     
 
+    let myTimeout;
     if(inputedLetters.innerHTML != undefined && inputedLetters.innerHTML.lastIndexOf(letter.toUpperCase()) > -1){
+        if(letter.trim().length > 0){
+            const choosedLang = getChoosedLang();
+            myTimeout = displayLetterAlreadyInformedMessage(choosedLang, letter);
+            input.value = "";
+        }
         return;
     }
     
+    if(myTimeout != undefined){
+        clearTimeout(myTimeout);
+    }
+
     disableHowToFinalizeTheGame();
     checkLetterOrWord(inputedLetters, letter);
     input.focus();
@@ -37,6 +51,7 @@ function check(){
 
     checkIfWinOrLose();
 }
+
 
 function disableHowToFinalizeTheGame(){
     document.getElementById("allWords").disabled = true;
@@ -155,14 +170,18 @@ function youWin(){
             updateTableWithLetter(word[w], i)
         }
     }
-    showFinalMessage('Parabéns!! Você conseguiu! Vamos mais uma rodada?', document.getElementById('resultWin'))
+    //let winMessage = `Parabéns!! Você conseguiu! Vamos mais uma rodada?`;
+    showFinalMessage(getWinMessage(getChoosedLang()), document.getElementById('resultWin'))
 }
 
 function youLose(){
 
+    const choosedLang = getChoosedLang(); 
+    let theWord =  getWordWas(choosedLang);
+
     let table = "<table><tr>";
     let langs = ""
-    let hint = '<label>A palavara era:</label> <ul>';
+    let hint = `<label>${theWord}</label> <ul>`;
     
     for (let w in word) {
         langs += `<td><a href='#'> <img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/> </a></td>`
@@ -170,7 +189,7 @@ function youLose(){
     }
     hint += '</ul>';
     table += langs + "</tr></table>";
-    showFinalMessage( hint + '<label class="fw-bold">Não foi dessa vez! Tente outra novamente, a prática te leva à perfeição!</label>',
+    showFinalMessage( hint + `<label class="fw-bold">${getDefeatMessage(choosedLang)}</label>`,
     	   document.getElementById('resultLose'));
 }
 
