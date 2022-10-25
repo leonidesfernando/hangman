@@ -309,12 +309,12 @@ function getNextImageName(){
     if(number < TOTAL){
         number++;
     }
-    return `img/${number}.png`
+    return `img/f${number}.png`
 
 }
 
 function getCurrentImageStatus(){
     const img = document.getElementById('playerStatus')
-    return img.src.substring(img.src.lastIndexOf('/')+1).split('.')[0];
+    return img.src.substring(img.src.lastIndexOf('/')+2).split('.')[0];
 }
 
