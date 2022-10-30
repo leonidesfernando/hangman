@@ -1,7 +1,7 @@
 const data =  JSON.parse(getDatabase());
 const word = generateWord();
 const TOTAL = 7;
-const LAST_IMAGE = 'img/7.png';
+const LAST_IMAGE = 'img/f7.png';
 
 function start(){
     console.log('no start: ', word);
