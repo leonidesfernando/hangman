@@ -10,7 +10,7 @@
     max-height: 25px;
 }
 
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 499px) {
 .parent-img {
     position: relative;
   }
@@ -20,12 +20,12 @@
   }
 
   .parent-responsive {
-    width: 100%;
+    width: 50%;
     height: auto;
   }
 
   .parent-img-responsive {
-    width: 100%;
+    width: 50%;
     height: auto;
   }
 
@@ -41,14 +41,14 @@
     position: absolute;
     top: 15%;
     left: 18%;
-    /*right: 50%;
-  bottom: 10%; */
+    right: 50%;
+  bottom: 10%; 
   }
 
   /*** for the result */
   .box {
     width: 45%;
-    height: 35%;
+    height: 50%;
     position: absolute;
     top: 38%;
     left: 30%;
@@ -73,6 +73,16 @@
 }
 
 
+.hangman-responsive{
+  max-width: 90%;
+  height: auto;
+}
+
+.minion-responsive{
+    max-width: 60%;
+    height: auto;
+}
+
 .parent-img {
     position: relative;
   }
@@ -81,15 +91,16 @@
     box-sizing: inherit;
   }
 
+  /*
   .parent-responsive {
     width: 100%;
     height: auto;
-  }
-
+  }*/
+/*
   .parent-img-responsive {
     width: 100%;
     height: auto;
-  }
+  }*/
 
   .child-img {
     position: absolute;
@@ -109,11 +120,11 @@
 
   /*** for the result */
   .box {
-    width: 45%;
-    height: 30%;
+    width: 60%;
+    height: 40%;
     position: absolute;
-    top: 45%;
-    left: 30%;
+    top: 15%;
+    left: 54%;
     opacity: 0.94;
     /*background: #0057e3;*/
   }
@@ -134,3 +145,8 @@
   }
 
 
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

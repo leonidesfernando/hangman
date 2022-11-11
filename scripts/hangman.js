@@ -6,7 +6,8 @@ const LAST_IMAGE = 'img/f7.png';
 function start(){
     console.log('no start: ', word);
 
-    generateTables(word);
+    //generateTables(word);
+    generateWordList(word);
     setFocus();
 }
 
@@ -92,6 +93,8 @@ function ifWinWithAllWords(){
 
 function hideInputAndDisplayRestart(){
     document.getElementById('sendData').style = 'display: none';
+    document.getElementById('btnNew').style = 'display: none';
+    document.getElementById('btnSend').style = 'display: none';
     document.getElementById('restart').style = '';
 }
 
@@ -177,7 +180,7 @@ function youWin(){
 function youLose(){
 
     const choosedLang = getChoosedLang(); 
-    let theWord =  getWordWas(choosedLang);
+    let theWord = getWordWas(choosedLang);
 
     let hint = `<label>${theWord}</label> <ul>`;
     
@@ -185,14 +188,19 @@ function youLose(){
         hint += `<li><img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/>: ${word[w].original}</li>`;
     }
     hint += '</ul>';
-    showFinalMessage( hint + `<label class="fw-bold">${getDefeatMessage(choosedLang)}</label>`,
-    	   document.getElementById('resultLose'));
+    document.getElementById('resultLose').style = "";
+    showFinalMessage(hint + `<label class="fw-bold white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">${getDefeatMessage(choosedLang)}</label>`,
+        document.getElementById('resultLoseMsg'));
 }
 
 function showFinalMessage(msg, result){
-    const div  = document.createElement('div')
-    div.setAttribute('style', 'margin: 10px')
-    result.appendChild(div)
+    const div  = document.createElement("div");
+    div.setAttribute("style", "margin: 10px");
+    div.setAttribute("class", "row");
+    //const img = document.createElement("img");
+    //img.setAttribute("src", "img/minion-win.gif");
+    result.appendChild(div);
+    //result.appendChild(img);
     div.innerHTML = msg;
     result.style=""
 }
@@ -224,13 +232,27 @@ function hasLetter(letter){
 }
 
 function getInputTableContent(wordLang, index){
-    return document.getElementById(`${wordLang.lang}RowLetter${index}`).value
+    return document.getElementById(`${wordLang.lang}RowLetter${index}`).innerText;
+}
+
+function updateLettersWithLetter(wordLang, index) {
+    const item = document.getElementById(`${wordLang.lang}RowLetter${index}`);
+    item.innerHTML = wordLang.original.charAt(index).toUpperCase();
+    item.style['background'] = 'lightcyan';
 }
 
 function updateTableWithLetter(wordLang, index){
     const item = document.getElementById(`${wordLang.lang}RowLetter${index}`);
-    item.value = wordLang.original.charAt(index).toUpperCase();
+    item.innerHTML = wordLang.original.charAt(index).toUpperCase();
+    //item.value = wordLang.original.charAt(index).toUpperCase();
     item.style['background'] = 'lightcyan';
+}
+
+function generateWordList(word){
+    for(let w in word){
+        generateWordByLanguage(word[w].lang, word[w].original);
+    }
+    generateHints(word);
 }
 
 function generateTables(word){
@@ -278,6 +300,16 @@ function getImageByLanguage(lang){
 }
 
 
+function generateWordByLanguage(language, originalWord){
+    let len = originalWord.length;
+    const divRow = document.getElementById(`${language}Row`);
+    for (let i = 0; i < len; i++) {
+        const letter = document.createElement(originalWord.charAt(i) == " " ? "span" : "label");
+        configureLetter(letter, language, i);
+        divRow.appendChild(letter);
+    }
+}
+
 function generateTableByLanguage(language, orignalWord, colspan){
     let len = orignalWord.length
 
@@ -286,7 +318,7 @@ function generateTableByLanguage(language, orignalWord, colspan){
     for(let i = 0; i < len; i++){
         td = document.createElement('td');
         
-        const input = document.createElement( orignalWord.charAt(i) == ' ' ? 'span' : 'input');
+        const input = document.createElement(orignalWord.charAt(i) == " " ? "span" : "input");
         configureInput(input, language, i);
         td.appendChild(input);
         row.appendChild(td);
@@ -294,12 +326,18 @@ function generateTableByLanguage(language, orignalWord, colspan){
     td.setAttribute('colspan', colspan);
 }
 
+function configureLetter(letter, language, index){
+    letter.setAttribute("id", `${language}RowLetter${index}`);
+    letter.setAttribute("style", "width:5%; border-bottom: 2px solid; font-weight: bold;margin-right: .88%;");
+    letter.setAttribute('class', 'text-center');
+    letter.innerHTML = "";
+}
 
 function configureInput(input, language, index){
     input.setAttribute('id', `${language}RowLetter${index}`);
     input.setAttribute('size', 1);
     input.setAttribute('maxlength', 1);
-    input.setAttribute('class', 'text-center');
+    input.setAttribute('class', 'text-center form-control-sm');
     input.setAttribute('disabled',true);
     input.setAttribute('style', 'border-bottom: 4px solid; font-weight: bold;');
 }
@@ -318,3 +356,4 @@ function getCurrentImageStatus(){
     return img.src.substring(img.src.lastIndexOf('/')+2).split('.')[0];
 }
 
+ 
