@@ -1,7 +1,8 @@
 const data =  JSON.parse(getDatabase());
 const word = generateWord();
 const TOTAL = 7;
-const LAST_IMAGE = 'img/f7.png';
+const LAST_IMAGE = "img/f7.png";
+const EMPTY_VALUE = " ";
 
 function start(){
     console.log('no start: ', word);
@@ -304,9 +305,14 @@ function generateWordByLanguage(language, originalWord){
     let len = originalWord.length;
     const divRow = document.getElementById(`${language}Row`);
     for (let i = 0; i < len; i++) {
-        const letter = document.createElement(originalWord.charAt(i) == " " ? "span" : "label");
-        configureLetter(letter, language, i);
-        divRow.appendChild(letter);
+        const isSpace = originalWord.charAt(i) == " ";
+        const element = document.createElement(isSpace ? "span" : "label");
+        if(isSpace){
+            configureSpace(element, i);
+        }else{
+            configureLetter(element, language, i);
+        }
+        divRow.appendChild(element);
     }
 }
 
@@ -324,6 +330,12 @@ function generateTableByLanguage(language, orignalWord, colspan){
         row.appendChild(td);
     }
     td.setAttribute('colspan', colspan);
+}
+
+function configureSpace(letter, index){
+    letter.setAttribute("id", `${language}RowLetter${index}`);
+    letter.setAttribute("style", "width:3%;margin-right: .88%;border-bottom: 2px solid gray;color:white");
+    letter.innerHTML = "  _  ";
 }
 
 function configureLetter(letter, language, index){
