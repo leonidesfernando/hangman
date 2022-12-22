@@ -233,7 +233,7 @@ function hasLetter(letter){
 }
 
 function getInputTableContent(wordLang, index){
-    return document.getElementById(`${wordLang.lang}RowLetter${index}`).innerText;
+    return document.getElementById(`${wordLang.lang}RowLetter${index}`).innerHTML;
 }
 
 function updateLettersWithLetter(wordLang, index) {
@@ -303,17 +303,23 @@ function getImageByLanguage(lang){
 
 function generateWordByLanguage(language, originalWord){
     let len = originalWord.length;
+
     const divRow = document.getElementById(`${language}Row`);
     for (let i = 0; i < len; i++) {
-        const isSpace = originalWord.charAt(i) == " ";
-        const element = document.createElement(isSpace ? "span" : "label");
-        if(isSpace){
-            configureSpace(element, i);
-        }else{
-            configureLetter(element, language, i);
-        }
+        const element = getInputCharacterType(originalWord.charAt(i), language, i);
         divRow.appendChild(element);
     }
+}
+
+function getInputCharacterType(char, language, index){
+    let element;
+    element = document.createElement("label");
+    if (char == " " || char == "-") {
+        configureSpaceOrHifen(element, language, index, char);
+    }else{
+        configureLetter(element, language, index);
+    }
+    return element;
 }
 
 function generateTableByLanguage(language, orignalWord, colspan){
@@ -332,10 +338,14 @@ function generateTableByLanguage(language, orignalWord, colspan){
     td.setAttribute('colspan', colspan);
 }
 
-function configureSpace(letter, index){
+function configureSpaceOrHifen(letter, language, index, spaceOrHifen){
     letter.setAttribute("id", `${language}RowLetter${index}`);
-    letter.setAttribute("style", "width:3%;margin-right: .88%;border-bottom: 2px solid gray;color:white");
-    letter.innerHTML = "  _  ";
+    let color = "gray";
+    if(spaceOrHifen == " "){
+        color = "white";
+    }
+    letter.setAttribute("style", `width:3%;margin-right: 1.3%;text-align:center;border-bottom: 2px solid white;color:${color}`);
+    letter.innerHTML = `${spaceOrHifen}`;
 }
 
 function configureLetter(letter, language, index){
