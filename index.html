@@ -26,16 +26,18 @@
     <div class="container">
         <div id="resultLose" style="display: none;" class="box overlay box-lose">
             <div class="row">
-                <div class="col-6" id="resultLoseMsg"></div>
-            <div class="col-6">
-                <div class="container">
-                    <div class="row">
-                        <div class="span4"></div>
-                        <div class="span4"><img alt="" class="minion-responsive" src="img/minion-lose.png" /></div>
-                        <div class="span4"></div>
+                <div class="col-12" id="resultLoseMsg"></div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span4"></div>
+                            <div class="span4"><img alt="" class="center-block minion-responsive" src="img/minion-lose.gif" /></div>
+                            <div class="span4"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
         <div id="resultWin" style="display: none;" class="fw-bold box overlay box-win">
@@ -69,19 +71,19 @@
                 <div class="row">
                     <div class="container-fluid">
                         <div class="form-check form-check-inline">
-                            <input type="radio" name="options" class="form-check-input" onclick="setTexts('langBR')"
+                            <input type="radio" name="langOptions" class="form-check-input" onclick="changeLanguage()"
                                 style="background-image: url(img/brazil-circle.png); height: 28px; width: 28px;" id="langBR"
                                 autocomplete="off">
                         </div>
                     
                         <div class="form-check form-check-inline">
-                            <input type="radio" name="options" class="form-check-input" onclick="setTexts('langPL')"
+                            <input type="radio" name="langOptions"  class="form-check-input" onclick="changeLanguage()"
                                 style="background-image: url(img/poland-cricle.png); height: 28px; width: 28px;" id="langPL"
                                 autocomplete="off">
                         </div>
                     
                         <div class="form-check form-check-inline">
-                            <input type="radio" name="options" class="form-check-input" onclick="setTexts('langUS')"
+                            <input type="radio" name="langOptions" class="form-check-input" onclick="changeLanguage()"
                                 style="background-image: url(img/usa-circle.png); height: 28px; width: 28px;" id="langUS" autocomplete="off"
                                 checked>
                         </div>
@@ -130,8 +132,6 @@
                     <input id="inputLetterOrWord" required="required" type="text" class="form-control"
                         placeholder="Informe uma letra ou a palavra SEM acento">
                 </div>
-                <a href="#" id="restart" class="btn btn-success btn-lg" style="display: none ;" tabindex="-1" role="button"
-                    onclick="restart()">Jogar novamente</a>
             </div>
             <div class="col-4">
                 <div class="d-grid gap-2 d-md-block">
@@ -142,24 +142,16 @@
             </div>
         </div>
     </div>
-                <div class="row">
-                    <div class="col-8">
-                        <div class="alert alert-warning" id="letterAlreadyInformedDiv" style="display: none;" role="alert">
-                            <h5 id="letterAlreadyInformedText"></h5>
-                        </div>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="alert alert-warning" id="letterAlreadyInformedDiv" style="display: none;" role="alert">
+                <h5 id="letterAlreadyInformedText"></h5>
+            </div>
+        </div>
+    </div>
 
     <div style="margin-top:.9%"></div>
     <div class="container-fluid">
-        <div class="row">
-            <!-- div class="col-1"><img src="img/brazil.png" alt="" width="28" height="28" /></div -->
-            <div class="col-12">
-                <img style="float: left; margin-right: 20px;" src="img/brazil.png" alt="" width="28" height="28" />
-                <div id="ptRow"></div>
-                <hr/>
-            </div>
-        </div>
         <div class="row">
             <div class="col-12">
                 <img style="float: left; margin-right: 20px;" src="img/poland.png" alt="" width="28" height="28" />
@@ -174,139 +166,24 @@
                 <div id="usRow"></div>
                 <hr />
             </div>
-            
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <img style="float: left; margin-right: 20px;" src="img/brazil.png" alt="" width="28" height="28" />
+                <div id="ptRow"></div>
+                <hr />
+            </div>
         </div>
     </div>
-    <!-- div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <table class="table table-responsive">
-                    <tr id="ptRow">
-                        <td>
-                            <img src="img/brazil.png" alt="" />
-                        </td>
-                    </tr>
-                    <tr id="plRow">
-                        <td>
-                            <img src="img/poland.png" alt="" />
-                        </td>
-                    </tr>
-                    <tr id="usRow">
-                        <td>
-                            <img src="img/usa.png" alt="" />
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div -->
-
-    <!-- div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div>
-                    <h5 id="inputedLettersTitle"></h5>
-                </div>
-                <table class="table table-responsive">
-                    <tr>
-                        <th class="fs-3" id="inputedLetters"></th>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div -->
-
-    <!--
-            <div class="row">
-                <div class="col-4 col-s-4">
-                    <div id="divResponsive" class="parent-responsive">
-                        <img id="playerStatus" class="parent-img-responsible" src="img/f0.png" alt="" />
-                    </div>
-
-                </div>
-                <div class="col-8 col-s-8">
-                    <div class="row">
-                        <table class="table">
-                            <tr id="ptRow">
-                                <td>
-                                    <img src="img/brazil.png" alt="" />
-                                </td>
-                            </tr>
-                            <tr id="plRow">
-                                <td>
-                                    <img src="img/poland.png" alt="" />
-                                </td>
-                            </tr>
-                            <tr id="usRow">
-                                <td>
-                                    <img src="img/usa.png" alt="" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-s-12">
-                            <div>
-                                <h3 id="inputedLettersTitle"></h3>
-                            </div>
-                            <table class="table">
-                                <tr>
-                                    <th class="fs-3" id="inputedLetters"></th>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="">
-                <div class="container"></div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="form-check col-12 col-s-12">
-                            <input class="form-check-input" type="checkbox" checked value="allWords" id="allWords">
-                            <label class="form-check-label" for="allWords" id="labelAllWords">
-                                Finalizar o jogo quando acertar em todos o idiomas
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
+    <div class="row">
+        <div class="col-2"></div>
+        <a href="#" id="restart" class="btn btn-success btn-lg col-8" style="display: none ;" tabindex="-1" role="button"
+            onclick="restart()">Jogar novamente</a>
+        <div class="col-2"></div>
+    </div>
 
-            <div class="row">
-                <div class="col-3">
-                    <img src="img/hint-ideia.png" id="hint" alt="" data-bs-toggle="popover"
-                        data-bs-trigger="hover focus" title="Dica/Por/Hint" data-bs-content="'" data-bs-html="true" />
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-8">
-                    <div id="sendData" class="input-group">
-                        <input id="inputLetterOrWord" required="required" type="text" class="form-control"
-                            placeholder="Informe uma letra ou a palavra SEM acento">
-                    </div>
-                    <a href="#" id="restart" class="btn btn-success btn-lg" style="display: none ;" tabindex="-1"
-                        role="button" onclick="restart()">Jogar novamente</a>
-                </div>
-                <div class="col-4" id="sendButtons">
-                        <a href="#" class="btn btn-primary" tabindex="-1" role="button" id="btnSend" onclick="check()">Enviar</a>
-                        <a href="#" class="btn btn-success" tabindex="-1" role="button" id="btnNew" onclick="restart()">Novo</a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-8">
-                    <div class="alert alert-warning" id="letterAlreadyInformedDiv" style="display: none;" role="alert">
-                        <h5 id="letterAlreadyInformedText"></h5>
-                    </div>
-                </div>
-            </div>
-
-        -->
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -323,9 +200,7 @@
 
             })
 
-
             var input = document.getElementById('inputLetterOrWord')
-
             input.addEventListener("keypress", function (event) {
 
                 if (event.key === "Enter") {
@@ -335,10 +210,17 @@
             });
 
 
+            function changeLanguage() {
+                const choosedLang = document.querySelector('input[name="langOptions"]:checked').attributes["id"].value;
+                langManager = new LanguageManager(choosedLang);
+                langManager.setTextsByLanguage();
+            }
+
+
             document.addEventListener("DOMContentLoaded", function () {
                 start();
-                const choosedLang = document.querySelector('input[name="options"]:checked').attributes["id"].value;
-                setTexts(choosedLang);
+                changeLanguage();
+                //const hangmanGame = new HangManGame();
             });
 
 

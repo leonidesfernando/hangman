@@ -16,6 +16,74 @@ class Messages{
         this.defeatMessage = defeatMessage;
         this.restart = restart;
     }
+
+    getLetterAlreadyInformed(){
+        return this.letterAlreadyInformed;
+    }
+
+    getDefeatMessage(){
+        return this.defeatMessage;
+    }
+
+    getWinMessage() {
+        return this.winMessage;
+    }
+
+    getWordWas(){
+        return this.wordWas;
+    }
+
+    setMessages(){
+        this.#setLanguage();
+        this.#setLabelAllWords();
+        this.#setHintGame();
+        this.#setInputedLetters();
+        this.#setInputPlaceHolder();
+        this.#setBtnSend();
+        this.#setBtnNew();
+        this.#setBtnRestart();
+    }
+    
+    #setBtnRestart() {
+        this.#set("restart", this.restart);
+    }
+
+    #setBtnNew() {
+        this.#set("btnNew", this.newGame)
+    }
+
+    #setBtnSend() {
+        this.#set("btnSend", this.sendButton);
+    }
+
+    #setHintGame() {
+        const hint = `<ul><li>${this.hintGame}</li></ul>`;
+        this.#setAttr("hintGameImg", "data-bs-content", hint);
+    }
+
+    #setInputedLetters() {
+        this.#set("inputedLettersTitle", this.informedLetters);
+    }
+
+    #setLanguage() {
+        this.#set("language", this.language);
+    }
+
+    #setLabelAllWords() {
+        this.#set("labelAllWords", this.allWordsMessage);
+    }
+
+    #setInputPlaceHolder() {
+        this.#setAttr("inputLetterOrWord", "placeholder", this.inputPlaceHolder);
+    }    
+
+    #set(id, val) {
+        document.getElementById(id).innerText = val;
+    }
+
+    #setAttr(id, attrName, val) {
+        document.getElementById(id).attributes[attrName].value = val;
+    }    
 }
 
 const lettetInformed = "#letter#";
@@ -59,105 +127,51 @@ const usa = new Messages("Click on the flag to change the language",
     "It was not this time! Try again, practice makes perfect!",
     "Play again");
 
+const langs = new Map();
+langs.set("langBR", portuguese);
+langs.set("langUS", usa);
+langs.set("langPL", polish);
 
-function getLangMessages(choosedLang) {
-    switch(choosedLang){
-        case "langBR":
-            return portuguese;
-        case "langUS":
-            return usa;
-        case "langPL":
-            return polish;
+
+class LanguageManager{
+    constructor(){}
+
+    static getSelectedLanguage(){
+        return document.querySelector('input[name="langOptions"]:checked').attributes["id"].value;
     }
-}
 
+    getLetterAlreadyInformed(){
+        return this.#getLangMessages().getLetterAlreadyInformed();
+    }
 
+    getDefeatMessage(){
+        return this.#getLangMessages().getDefeatMessage();
+    }
 
-function setTexts(choosedLang) {
-    const lang = getLangMessages(choosedLang);
-    setLanguage(lang);
-    setLabelAllWords(lang);
-    setHintGame(lang);
-    setInputedLetters(lang);
-    setInputPlaceHolder(lang);
-    setBtnSend(lang);
-    setBtnNew(lang);
-    setBtnRestart(lang);
+    getWinMessage(){
+        return this.#getLangMessages().getWinMessage();
+    }
 
-    //TODO: always the last one
-    setFocus();
-}
+    getWordWas(){
+        return this.#getLangMessages().getWordWas();
+    }
 
-function setBtnRestart(lang){
-    set("restart", lang.restart);
-}
+    #getLangMessages() {
+        const lang = LanguageManager.getSelectedLanguage();
+        return langs.get(lang);
+    }
 
-function getWinMessage(choosedLang){
-    const lang = getLangMessages(choosedLang);
-    return lang.winMessage;
-}
+    setTextsByLanguage() {
+        const lang = this.#getLangMessages();
+        lang.setMessages();
 
-function getDefeatMessage(choosedLang){
-    const lang = getLangMessages(choosedLang);
-    return lang.defeatMessage;
-}
+        //TODO: always the last one
+        this.#setFocus();
+    }
 
-function getWordWas(choosedLang){
-    const lang = getLangMessages(choosedLang);
-    return lang.wordWas;
-}
+    #setFocus() {
+        const input = document.getElementById('inputLetterOrWord');
+        input.focus();
+    }
 
-
-function hideLetterAlreadyDisplayed() {
-    document.getElementById("letterAlreadyInformedDiv").style.display = "none";
-}
-
-
-function displayLetterAlreadyInformedMessage(choosedLang, letter) {
-    const lang = getLangMessages(choosedLang);
-    const myTimeout = setTimeout(hideLetterAlreadyDisplayed, 4000);
-    document.getElementById("letterAlreadyInformedDiv").style.display = "block";
-    document.getElementById("letterAlreadyInformedText").innerHTML = lang.letterAlreadyInformed.replace("#letter#", letter.toUpperCase());
-
-    return myTimeout;
-    
-}
-
-
-function setBtnNew(lang){
-    set("btnNew", lang.newGame)
-}
-
-function setBtnSend(lang){
-    set("btnSend", lang.sendButton);
-}
-
-function setInputPlaceHolder(lang){
-    setAttr("inputLetterOrWord", "placeholder", lang.inputPlaceHolder);
-}
-
-function setInputedLetters(lang){
-    set("inputedLettersTitle", lang.informedLetters);
-}
-
-function setLanguage(lang){
-    set("language", lang.language)
-}
-
-function setHintGame(lang) {
-    const hint = `<ul><li>${lang.hintGame}</li></ul>`;
-    setAttr("hintGameImg", "data-bs-content", hint);
-}
-
-
-function setLabelAllWords(lang) {
-    set("labelAllWords", lang.allWordsMessage);
-}
-
-function set(id, val){
-    document.getElementById(id).innerText = val;
-}
-
-function setAttr(id, attrName, val){
-    document.getElementById(id).attributes[attrName].value = val;
 }

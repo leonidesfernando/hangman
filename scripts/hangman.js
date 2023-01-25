@@ -4,6 +4,7 @@ const TOTAL = 7;
 const LAST_IMAGE = "img/f7.png";
 const EMPTY_VALUE = " ";
 
+
 function start(){
     console.log('no start: ', word);
 
@@ -22,7 +23,7 @@ function restart(){
 }
 
 function getChoosedLang(){
-    return document.querySelector('input[name="options"]:checked').attributes["id"].value;
+    return document.querySelector('input[name="langOptions"]:checked').attributes["id"].value;
 }
 
 function check(){
@@ -52,6 +53,23 @@ function check(){
     input.value = '';
 
     checkIfWinOrLose();
+}
+
+
+function hideLetterAlreadyDisplayed() {
+    document.getElementById("letterAlreadyInformedDiv").style.display = "none";
+}
+
+
+function displayLetterAlreadyInformedMessage(choosedLang, letter) {
+
+    const langManager = new LanguageManager();
+    
+    const myTimeout = setTimeout(hideLetterAlreadyDisplayed, 4000);
+    document.getElementById("letterAlreadyInformedDiv").style.display = "block";
+    document.getElementById("letterAlreadyInformedText").innerHTML = langManager.getLetterAlreadyInformed().replace("#letter#", letter.toUpperCase());
+
+    return myTimeout;
 }
 
 
@@ -175,13 +193,15 @@ function youWin(){
         }
     }
     //let winMessage = `Parabéns!! Você conseguiu! Vamos mais uma rodada?`;
-    showFinalMessage(getWinMessage(getChoosedLang()), document.getElementById('resultWin'))
+    //FIXME: put this as a attribute of HangmanGame class
+    const langManager = new LanguageManager();
+    showFinalMessage(langManager.getWinMessage(), document.getElementById('resultWin'))
 }
 
 function youLose(){
 
-    const choosedLang = getChoosedLang(); 
-    let theWord = getWordWas(choosedLang);
+    const langManager = new LanguageManager();
+    const theWord = langManager.getWordWas();
 
     let hint = `<label>${theWord}</label> <ul>`;
     
@@ -189,9 +209,9 @@ function youLose(){
         hint += `<li><img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/>: ${word[w].original}</li>`;
     }
     hint += '</ul>';
-    document.getElementById('resultLose').style = "";
-    showFinalMessage(hint + `<label class="fw-bold white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">${getDefeatMessage(choosedLang)}</label>`,
-        document.getElementById('resultLoseMsg'));
+    //document.getElementById('resultLose').style = "";
+    showFinalMessage(hint + `<label class="fw-bold white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">${langManager.getDefeatMessage()}</label>`,
+        document.getElementById('resultLose'));
 }
 
 function showFinalMessage(msg, result){
