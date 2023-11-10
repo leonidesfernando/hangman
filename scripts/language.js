@@ -1,6 +1,6 @@
 class Messages{
     constructor(language, hintGame, informedLetters, allWordsMessage, 
-            inputPlaceHolder, sendButton, newGame, letterAlreadyInformed,
+            inputPlaceHolder, lampHit, closeHint, sendButton, newGame, letterAlreadyInformed,
             wordWas, winMessage, defeatMessage,
             restart){
         this.language = language;
@@ -8,6 +8,8 @@ class Messages{
         this.informedLetters = informedLetters;
         this.allWordsMessage = allWordsMessage;
         this.inputPlaceHolder = inputPlaceHolder;
+        this.lampHit = lampHit;
+        this.closeHint = closeHint;
         this.sendButton = sendButton;
         this.newGame = newGame;
         this.letterAlreadyInformed = letterAlreadyInformed;
@@ -33,12 +35,17 @@ class Messages{
         return this.wordWas;
     }
 
+    getCloseHint(){
+        return this.closeHint;
+    }
+
     setMessages(){
         this.#setLanguage();
         this.#setLabelAllWords();
         this.#setHintGame();
         this.#setInputedLetters();
         this.#setInputPlaceHolder();
+        this.#setTapLampForHint()
         this.#setBtnSend();
         this.#setBtnNew();
         this.#setBtnRestart();
@@ -75,7 +82,11 @@ class Messages{
 
     #setInputPlaceHolder() {
         this.#setAttr("inputLetterOrWord", "placeholder", this.inputPlaceHolder);
-    }    
+    }
+
+    #setTapLampForHint(){
+        this.#set("tapForHint", this.lampHit);
+    }
 
     #set(id, val) {
         document.getElementById(id).innerText = val;
@@ -93,6 +104,8 @@ const portuguese = new Messages("Clique na bandeira para mudar o idioma",
     "Letras informadas",
     "Finalizar o jogo somente quando acertar em todos o idiomas",
     "Informe uma letra ou a palavra SEM acento",
+    "Toque na lâmpada para obter dicas",
+    "Toque fora para fechar",
     "Enviar",
     "Novo",
     `A letra <i>${lettetInformed}</i> foi já informada`,
@@ -106,6 +119,8 @@ const polish = new Messages("Kliknij flagę, aby zmienić język",
     "Poinformowane listy", 
     "Zakończ grę tylko wtedy, gdy zrozumiesz ją poprawnie we wszystkich językach",
     "Wpisz literę lub słowo BEZ akcentu",
+    "Dotknij lampy, aby uzyskać wskazówki",
+    "Stuknij, aby zamknąć",
     "Wysłać",
     "Nowy",
     `Litera <i>${lettetInformed}</i> została już poinformowana`,
@@ -119,6 +134,8 @@ const usa = new Messages("Click on the flag to change the language",
     "Informed letters", 
     "Finish the game only when you get it right in all languages",
     "Inform a letter or a word WITHOUT an accent", 
+    "Tap the lamp to get hints",
+    "Tap away to close",
     "Send", 
     "New",
     `The letter <i>${lettetInformed}</i> has already been informed`,
@@ -142,6 +159,10 @@ class LanguageManager{
 
     getLetterAlreadyInformed(){
         return this.#getLangMessages().getLetterAlreadyInformed();
+    }
+
+    getCloseHintMessage(){
+        return this.#getLangMessages().getCloseHint();
     }
 
     getDefeatMessage(){

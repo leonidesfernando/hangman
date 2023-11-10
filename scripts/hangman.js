@@ -4,12 +4,12 @@ const TOTAL = 7;
 const LAST_IMAGE = "img/f7.png";
 const EMPTY_VALUE = " ";
 
+//TODO: https://www.w3schools.com/howto/howto_js_countdown.asp
 
 function start(){
-    console.log('no start: ', word);
+    //console.log('no start: ', word);
 
-    //generateTables(word);
-    generateWordList(word);
+    generateWordList();
     setFocus();
 }
 
@@ -134,7 +134,7 @@ function checkLetterOrWord(inputedLetters, letter){
     let img = document.getElementById('playerStatus');
     let hasTheLetter = false;
     if (letter.length == 1 && !hasLetter(letter)) {
-        console.log(getCurrentImageStatus());
+        //console.log(getCurrentImageStatus());
         img.src = getNextImageName();
     } else if (letter.length > 1) {
         let size = letter.length;
@@ -229,9 +229,9 @@ function showFinalMessage(msg, result){
 function generateWord(){
     //TODO: criar cookie com local data, hora  milisegundo e armezenar os indices gerados e desconsiderar esses indices para pegar uma nova palavra
     const len = data.words.length
-    console.log('len:', len)
+    //console.log('len:', len)
     const index = (Math.floor(new Date().getTime()*Math.random())%(len)); //Math.floor(Math.random() * len);
-    console.log('index:', index)
+    //console.log('index:', index)
     return data.words[index].word
 }
 
@@ -269,22 +269,24 @@ function updateTableWithLetter(wordLang, index){
     item.style['background'] = 'lightcyan';
 }
 
-function generateWordList(word){
+function generateWordList(){
     for(let w in word){
         generateWordByLanguage(word[w].lang, word[w].original);
     }
-    generateHints(word);
+    generateHints();
 }
 
+//@deprecated
 function generateTables(word){
     
     const colspan = getSizeLargestWord(word)
     for(let w in word){
         generateTableByLanguage(word[w].lang, word[w].original, colspan);
     }
-    generateHints(word);
+    generateHints();
 }
 
+//@deprecated
 function getSizeLargestWord(word){
     let smallest = 0;
     let biggest = 0;
@@ -299,15 +301,24 @@ function getSizeLargestWord(word){
     return biggest - smallest;
 }
 
-function generateHints(word) {
+function generateHints() {
     let hint = '<ul>';
     const img = document.getElementById('hint');
     for (const w in word) {
         hint += `<li><img class='icon-flag-img' src='${getImageByLanguage(word[w].lang)}'/>: ${word[w].hint}</li>`;
     }
     hint += '</ul>';
+
+    const langManager = new LanguageManager();
+
+    const closeMessage = langManager.getCloseHintMessage()
+    const div = `<div><em><small>${closeMessage}</small></em></div>`
+
+    hint += div;
     img.setAttribute('data-bs-content', hint);
+
 }
+
 
 function getImageByLanguage(lang){
     switch(lang){
