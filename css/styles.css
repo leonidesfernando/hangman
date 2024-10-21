@@ -3,88 +3,108 @@
   height: auto;
 }
 
-.icon-flag-img{
-    height: auto;
-    width: auto;
-    max-width: 25px;
-    max-height: 25px;
+.icon-flag-img {
+  height: auto;
+  width: auto;
+  max-width: 25px;
+  max-height: 25px;
 }
 
-
-.hangman-responsive{
+.hangman-responsive {
   max-width: 90%;
   height: auto;
 }
 
-.minion-responsive{
-    max-width: 50%;
-    height: auto;
+.minion-responsive {
+  max-width: 50%;
+  height: auto;
 }
 
 .parent-img {
-    position: relative;
-  }
+  position: relative;
+  width: 100%;
+  height: auto;
+}
 
-  ::after ::before {
-    box-sizing: inherit;
-  }
+.child-img {
+  position: absolute;
+  top: 17.5%;
+  left: 15.5%;
+  width: 30%;
+  height: auto;
+}
 
-  /*
-  .parent-responsive {
-    width: 100%;
-    height: auto;
-  }*/
-/*
-  .parent-img-responsive {
-    width: 100%;
-    height: auto;
-  }*/
+.body-img {
+  position: absolute;
+  top: 15.5%;
+  left: 8%;
+  width: 40%;
+  height: auto;
+}
 
-  .child-img {
-    position: absolute;
-    top: 17.5%;
-    left: 15.5%;
-    right: 50%;
-    bottom: 10%;
-  }
+.box {
+  width: 50%;
+  height: 48%;
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  opacity: 0.95;
+}
 
-  .body-img {
-    position: absolute;
-    top: 15.5%;
-    left: 8%;
-    /*right: 50%;
-  bottom: 10%; */
-  }
+.overlay {
+  z-index: 9;
+}
 
-  /*** for the result */
-  .box {
-    width: 50%;
-    height: 48%;
-    position: absolute;
-    top: 10%;
-    left: 15%;
-    opacity: 0.95;
-    /*background: #0057e3;*/
-  }
+.box-lose {
+  border-color: #876605;
+  background-color: #ffc107;
+}
 
-  .overlay {
-    z-index: 9;
-    /*    background: #009938; */
-  }
-
-  .box-lose {
-    border-color: #876605;
-    background-color: #ffc107;
-  }
-
-  .box-win {
-    border-color: #033785;
-    background-color: #0d6efd;
-  }
-
+.box-win {
+  border-color: #033785;
+  background-color: #0d6efd;
+}
 
 .center-block {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Media queries for responsiveness on different devices */
+
+@media (max-width: 768px) {
+
+  /* Tablet and mobile view */
+  .box {
+    width: 80%;
+    height: auto;
+    top: 5%;
+    left: 10%;
+  }
+
+  .child-img,
+  .body-img {
+    width: 60%;
+    /* Make elements smaller for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Small mobile view */
+  .box {
+    width: 90%;
+    height: auto;
+    top: 5%;
+    left: 5%;
+  }
+
+  .child-img,
+  .body-img {
+    width: 70%;
+    /* Further reduce for smaller screens */
+  }
 }
